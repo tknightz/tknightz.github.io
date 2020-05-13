@@ -36,9 +36,9 @@ google_fonts:
     weights: "400,400i,700,700i"
 google_analytics: # Google Analytics id, e.g. "UA-NNNNNNNN-N"
 disqus:
-  shortname: tknightz # Disqus shortname, e.g. "my_disqus_shortname"
+  shortname: "tknightz" # Disqus shortname, e.g. "my_disqus_shortname"
 twitter:
-  username: mmistakes # site's Twitter username
+  username: "tknightz" # site's Twitter username
 
 # Liquid
 liquid:
@@ -105,10 +105,10 @@ defaults:
 
 # Site Author
 author:
-  name: Michael Rose
+  name: TKnightz
   picture: /images/michael-rose-photo.jpg
   email:
-  twitter: mmistakes
+  twitter: tknightz
   links:
     - title: Twitter
       url: https://twitter.com/mmistakes
