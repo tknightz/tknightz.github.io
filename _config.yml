@@ -38,7 +38,7 @@ google_analytics: # Google Analytics id, e.g. "UA-NNNNNNNN-N"
 disqus:
   shortname: "tuyenknightz" # Disqus shortname, e.g. "my_disqus_shortname"
 twitter:
-  username: "tknightz" # site's Twitter username
+  username: "tknightz_havent_yet" # site's Twitter username
 
 # Liquid
 liquid:
@@ -108,7 +108,7 @@ author:
   name: TKnightz
   picture: /images/avatar.jpg
   email:
-  twitter: tknightz
+  twitter: tknightz_havent_yet
   links:
     - title: Twitter
       url: https://twitter.com/tknightz
@@ -123,10 +123,10 @@ author:
 # Footer Links
 footer_links:
   - title: Twitter
-    url: https://twitter.com/tknightz
+    url: https://twitter.com/tknightz_havent_yet
     icon: fab fa-twitter-square
   - title: Instagram
-    url: https://instagram.com/tknightz
+    url: https://instagram.com/tknightz_havent_yet
     icon: fab fa-instagram
   - title: GitHub
     url: https://github.com/tknightz
