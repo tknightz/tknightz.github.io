@@ -1,0 +1,268 @@
+I"�@<p>Mình chuẩn bị thi giữa kì môn <strong>“Nhập môn trí tuệ nhân tạo”</strong> nhưng do học ko chịu nghe giảng nên post này tạo ra để  <em>“lấp đầy những lỗ hổng”</em> không may được tạo ra do tính lười học của mình.</p>
+
+<!--more-->
+
+<p>Sau một hồi xem lại sách thì có 3 mục lớn mình phải học, và nó đây:</p>
+
+<div id="entry-table-of-contents" class="toc-wrapper">
+  <h2 id="toc-toggle" class="no_toc">
+  Table of Contents <i class="toc-toggle-icon fas fa-chevron-down"></i>
+</h2>
+<ol id="markdown-toc">
+  <li><a href="#mục-1--tìm-kiếm" id="markdown-toc-mục-1--tìm-kiếm">Mục 1 : Tìm kiếm</a>    <ol>
+      <li><a href="#tìm-kiếm-mù" id="markdown-toc-tìm-kiếm-mù">Tìm kiếm mù</a>        <ol>
+          <li><a href="#một-số-thuật-toán-cơ-bản" id="markdown-toc-một-số-thuật-toán-cơ-bản">Một số thuật toán cơ bản</a>            <ol>
+              <li><a href="#thuật-toán-tìm-kiếm-theo-chiều-rộng---bfs" id="markdown-toc-thuật-toán-tìm-kiếm-theo-chiều-rộng---bfs">Thuật toán tìm kiếm theo chiều rộng - BFS</a></li>
+            </ol>
+          </li>
+          <li><a href="#thuật-toán-duyệt-theo-giá-thành-thống-nhất-uniform-cost-search" id="markdown-toc-thuật-toán-duyệt-theo-giá-thành-thống-nhất-uniform-cost-search">Thuật toán duyệt theo giá thành thống nhất (Uniform-cost Search)</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+</div>
+
+<h1 id="mục-1--tìm-kiếm">Mục 1 : Tìm kiếm</h1>
+
+<h2 id="tìm-kiếm-mù">Tìm kiếm mù</h2>
+
+<p><strong>Bỏ qua một số thứ râu ria ta vào luôn tổng quan các bước để giải một bài toán tìm kiếm :</strong></p>
+
+<ol>
+  <li>Tập hữu hạn các trạng <strong>trạng thái</strong> có thể: Q</li>
+  <li>Tập các trạng thái xuất phát: S⊆Q</li>
+  <li>Hành động hay hàm nối tiếp hay toán tử <em>P(x)</em>, là tập các trạng thái nhận đuợc từ trạng thái x do kết quả thực hiện hành động hay toán tử.</li>
+  <li>Xác định đích:
+    <ul>
+      <li>Tường minh, cho bởi tập đích G ⊆Q</li>
+      <li>Không tường minh, cho bởi một số điều kiện.</li>
+    </ul>
+  </li>
+  <li>Giá thành đường đi: Ví dụ, tổng khoảng cách, số lượng hành động,…</li>
+</ol>
+
+<p>Lời giải cho bài toán tìm kiếm là <em>chuỗi hành động</em> cho phép di chuyển từ trạng thái xuất phát đến trạng thái đích.</p>
+
+<p><strong>Các tiêu chuẩn đánh giá thuật toán tìm kiếm :</strong></p>
+
+<ul>
+  <li><strong>Độ phức tạp tính toán:</strong>
+    <ul>
+      <li>Khối lượng tính toán cần thực hiện để tìm ra lời giải.</li>
+      <li>Số lượng trạng thái cần xem xét trước khi tìm ra lời giải.</li>
+    </ul>
+  </li>
+  <li><strong>Yêu cầu bộ nhớ</strong></li>
+  <li><strong>Tính đầy đủ</strong></li>
+  <li><strong>Tính tối ưu :</strong> Nếu bài toán có nhiều lời giải thì thuật toán có thể tìm ra lời giải tốt nhất ko?</li>
+</ul>
+
+<blockquote>
+  <p>Đọc một hồi hết đoạn trên thì mình nhớ ra lý do vì sao hôm đấy mình lại ko chịu nghe giảng rồi, hóa ra là mình thiếp đi lúc nào ko hay…</p>
+</blockquote>
+
+<p>Đống lý thuyết này cứ copy ra đây thôi, chúng ta cơ bản la quan tâm đến thực hành hơn.</p>
+
+<h3 class="notice--info" id="một-số-thuật-toán-cơ-bản">Một số thuật toán cơ bản</h3>
+
+<h4 id="thuật-toán-tìm-kiếm-theo-chiều-rộng---bfs">Thuật toán tìm kiếm theo chiều rộng - BFS</h4>
+
+<p><strong>Nguyên tắc:</strong> trong số những nút biên, lựa chọn nút gần gốc nhất để mở rộng (nôm na là đi hết tầng này rồi mới tới tầng sau kiểu kiểu vây…)</p>
+
+<p><img src="/images/bfs.gif" alt="BFS animation" class="align-center" /></p>
+
+<p>Ý tưởng để giải bài toán này là ta sẽ dùng một hàng đợi (queue) để duyệt các nút và phải lưu lại đường đi ngắn nhất.</p>
+
+<p><strong><em>Lưu ý</em></strong> : Ko thêm những nút đã duyệt rồi hoặc đang có trong queue để tránh bị lặp vô hạn.</p>
+
+<p><strong>Ví dụ</strong></p>
+
+<p><img src="/images/bfs_problem.png" alt="!BFS problem" class="align-center" /></p>
+
+<p><strong>Cách trình bày lý thuyết</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Nút được mở rộng</th>
+      <th>Tập biên O (queue)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>S</td>
+      <td><strong>A<sub>S</sub></strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A<sub>S</sub></td>
+      <td><strong>B<sub>A</sub></strong>, <strong>C<sub>A</sub></strong></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>B<sub>A</sub></td>
+      <td>C<sub>A</sub>, <strong>D<sub>B</sub></strong></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>C<sub>A</sub></td>
+      <td>D<sub>B</sub>, <strong>G<sub>C</sub></strong></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>D<sub>B</sub></td>
+      <td>G<sub>C</sub></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>G<sub>C</sub></td>
+      <td>Đích</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>=&gt; Đường đi : S -&gt; A -&gt; C -&gt; G</strong></p>
+
+<p><strong>Nhận xét về thuật toán</strong></p>
+
+<ul>
+  <li><strong>Đầy đủ :</strong> Có <em>(nó duyệt qua các nút trong từng hàng, nếu số nút trong hàng là hữu hạn thì đầy đủ.)</em></li>
+  <li><strong>Thời gian:</strong> <em>(Time Complexity)</em> Giả sử mỗi nút có b nút con, d : độ sâu của cây =&gt; Thời gian duyệt xong : 1+b+b<sup>2</sup>+b<sup>3</sup>+…+b<sup>d</sup> = O(b<sup>d</sup>)</li>
+  <li><strong>Bộ nhớ:</strong> <em>(Space complexity)</em> O(b<sup>d</sup>)</li>
+  <li><strong>Tối ưu?</strong> Có (nếu không xét đến khoảng cách giữa các nút hay khoảng cách các nút bằng nhau thì nó sẽ cho kết quả tốt nhất.)</li>
+</ul>
+
+<p><strong>Vào code nào :))</strong></p>
+
+<p>Ta đã biết biểu diễn một đồ thị (graph) bằng ma trận (matrix) nhưng ở đây mình sẽ dùng dictionary trong Python để biểu diễn đồ thị trên. Here is code :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BFS</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span>
+        <span class="c1"># Cái này để lưu lại đường đi 
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">father</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Dùng mảng để lưu lại các node đã kiểm tra
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">mark</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Hàng đợi để xét các node.
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">findPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s">'S'</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'S -&gt; '</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">findPath</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">father</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s">'G'</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s"> -&gt; '</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Thêm phần tử đầu vào queue để bắt đầu vòng lặp
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'S'</span><span class="p">)</span>
+        <span class="c1"># Duyệt đến khi nào ko còn node nào trong queue thì thôi.
+</span>        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">queue</span><span class="p">):</span>
+            <span class="c1"># Lấy phần từ đầu ra xét
+</span>            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># Nếu là G rồi thì in ra đường đi thôi.
+</span>            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s">'G'</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">findPath</span><span class="p">(</span><span class="s">'G'</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Thêm các node con của node đang xét
+</span>                <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="nb">dict</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                    <span class="c1"># Chỉ thêm các node chưa được duyệt
+</span>                    <span class="k">if</span> <span class="n">child</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">mark</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="p">.</span><span class="n">father</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
+                        <span class="bp">self</span><span class="p">.</span><span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+        <span class="c1"># Nếu G chưa được duyệt =&gt; ko có đường đi đến G.
+</span>        <span class="k">if</span> <span class="s">'G'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">mark</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'No path to G!'</span><span class="p">)</span>
+
+<span class="s">""" 
+Dùng dict để thể hiện đường đi.
+
+dict['A'] = ['B','C'] =&gt; từ A có thể đi đến B và C.
+"""</span>
+<span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'S'</span><span class="p">:</span> <span class="p">[</span><span class="s">'A'</span><span class="p">],</span>
+    <span class="s">'A'</span><span class="p">:</span> <span class="p">[</span><span class="s">'B'</span><span class="p">,</span><span class="s">'C'</span><span class="p">],</span>
+    <span class="s">'B'</span><span class="p">:</span> <span class="p">[</span><span class="s">'D'</span><span class="p">],</span>
+    <span class="s">'C'</span><span class="p">:</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span><span class="s">'G'</span><span class="p">],</span>
+    <span class="s">'D'</span><span class="p">:</span> <span class="p">[</span><span class="s">'G'</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">bfs</span> <span class="o">=</span> <span class="n">BFS</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+
+<span class="n">bfs</span><span class="p">.</span><span class="n">solve</span><span class="p">()</span>
+
+
+</code></pre></div></div>
+
+<p><strong>Run it!</strong></p>
+
+<p><img src="/images/solve_bfs.png" alt="BFS Solved!" /></p>
+
+<h3 id="thuật-toán-duyệt-theo-giá-thành-thống-nhất-uniform-cost-search">Thuật toán duyệt theo giá thành thống nhất (Uniform-cost Search)</h3>
+
+<p>Đây là một biến thể của BFS cơ chế hoạt động cũng như BFS xét hết hàng này đến hàng tiếp, nhưng tại sao ta lại cần một biến thể của BFS ở đây? Như đã nói ở phần trên BFS chỉ tối ưu khi ta không quan tâm đến khoảng cách các nút hoặc khoảng cách các nút bằng nhau.</p>
+
+<p><strong>Ví dụ</strong> : Nếu bạn tìm đường từ nhà đến trường bạn phải đi qua một vài trạm xe buýt, nếu bạn <del><strong>không quan tâm khoảng cách</strong></del>  giữa các trạm xe buýt thì <strong>BFS</strong> sẽ làm tốt nhiệm vụ của nó. (<strong>BFS</strong> sẽ tìm cho bạn đường mà bạn phải đổi tuyến ít nhất nhưng nó ko phải đường đi ngắn nhất vì dù đi qua ít trạm nhưng khoảng cách giữa 2 trạm lại dài hơn so với con đường khác có 3 trạm xe.) =&gt; <strong>UCS</strong> ra đời để tìm cho bạn đường đi ngắn nhất.</p>
+
+<p><strong>BFS -&gt; đường đi ít trạm xe nhất (đổi xe buýt ít nhất.)</strong></p>
+
+<p><strong>UCS -&gt; đường đi ngắn nhất (có thể phải đổi xe buýt nhiều hơn.)</strong></p>
+
+<p>Tiếp tục với bài toán của BFS nhưng giờ ta có thể khoảng cách giữa cách đường đi.</p>
+
+<p><img src="/images/ucs_problem.png" alt="UCS Problem" class="align-center" /></p>
+
+<p><strong>Cách trình bày lý thuyết</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Nút được mở rộng</th>
+      <th>Tập biên O (queue)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>S</td>
+      <td><strong>A<sub>S</sub></strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A<sub>S</sub></td>
+      <td><strong>B<sub>A</sub></strong>, <strong>C<sub>A</sub></strong></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>B<sub>A</sub></td>
+      <td>C<sub>A</sub>, <strong>D<sub>B</sub></strong></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>C<sub>A</sub></td>
+      <td>D<sub>B</sub>, <strong>G<sub>C</sub></strong></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>D<sub>B</sub></td>
+      <td>G<sub>C</sub></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>G<sub>C</sub></td>
+      <td>Đích</td>
+    </tr>
+  </tbody>
+</table>
+
+:ET
