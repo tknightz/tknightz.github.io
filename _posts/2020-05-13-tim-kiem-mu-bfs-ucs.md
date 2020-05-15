@@ -1,5 +1,5 @@
 ---
-title: Tìm kiếm mù BFS (Breath First Search) và UCS (Uniform-cost Search)
+title: Tìm kiếm mù BFS (Breadth First Search) và UCS (Uniform-cost Search)
 excerpt_separator: "<!--more-->"
 tags:
     - study
@@ -58,7 +58,7 @@ Tìm kiếm theo mình biết là chia làm 2 loại:
 
 **Nguyên tắc:** trong số những nút biên, lựa chọn nút gần gốc nhất để mở rộng (nôm na là đi hết tầng này rồi mới tới tầng sau kiểu kiểu vây...)
 
-![BFS animation]({{'/images/bfs.gif'}}){: .align-center}
+![BFS animation]({{'/images/study/algo/bfs.gif'}}){: .align-center}
 
 Ý tưởng để giải bài toán này là ta sẽ dùng một hàng đợi (queue) để duyệt các nút và phải lưu lại đường đi ngắn nhất.
 
@@ -66,7 +66,7 @@ Tìm kiếm theo mình biết là chia làm 2 loại:
 
 **Ví dụ**
 
-![!BFS problem]({{'/images/bfs_problem.png'}}){: .align-center}
+![!BFS problem]({{'/images/study/algo/bfs_problem.png'}}){: .align-center}
 
 ### Cách trình bày lý thuyết
 
@@ -84,7 +84,7 @@ Tìm kiếm theo mình biết là chia làm 2 loại:
 **Nhận xét về thuật toán**
 
 * **Đầy đủ :** Có *(nó duyệt qua các nút trong từng hàng, nếu số nút trong hàng là hữu hạn thì đầy đủ.)*
-* **Thời gian:** *(Time Complexity)* Giả sử mỗi nút có b nút con, d : độ sâu của cây => Thời gian duyệt xong : 1+b+b<sup>2</sup>+b<sup>3</sup>+...+b<sup>d</sup> = O(b<sup>d</sup>)
+* **Thời gian:** *(Time Complexity)* Giả sử mỗi nút có tối đa b nút con, d : độ sâu từ gốc đến nút G => Thời gian duyệt xong : 1+b+b<sup>2</sup>+b<sup>3</sup>+...+b<sup>d</sup> = O(b<sup>d</sup>)
 * **Bộ nhớ:** *(Space complexity)* O(b<sup>d</sup>)
 * **Tối ưu?** Có (nếu không xét đến khoảng cách giữa các nút hay khoảng cách các nút bằng nhau thì nó sẽ cho kết quả tốt nhất.)
 
@@ -162,7 +162,7 @@ BFS.solve()
 
 #### Kết quả khi chạy code
 
-![BFS Solved!]({{'/images/solve_bfs.png'}}){:. align-center}
+![BFS Solved!]({{'/images/study/algo/solve_bfs.png'}}){:. align-center}
 
 
 ## Thuật toán duyệt theo giá thành thống nhất (Uniform-cost Search)
@@ -185,7 +185,7 @@ BFS.solve()
 
 **Ví dụ:** Tiếp tục với bài toán của **BFS** nhưng giờ ta có khoảng cách giữa cách đường đi.
 
-![UCS Problem]({{'/images/ucs_problem.png'}}){: .align-center}
+![UCS Problem]({{'/images/study/algo/ucs_problem.png'}}){: .align-center}
 
 ### Cách trình bày lý thuyết
 
@@ -201,6 +201,17 @@ BFS.solve()
 <b>( * ) Lưu ý :</b>  Xét **D<sub>B</sub>** có đường đến nút **G**, mà nút **G** đã ở trong ***queue*** rồi ta so sánh giá (cost) với **G** trong ***queue***. Đuờng đi qua **D -> G** (tổng là 75) nhỏ hơn so với đường đi qua **C -> G** (95) nên ta cập nhật giá (cost) và nút cha của **G**.
 
 **=> Đường đi : S -> A -> B -> D -> G**
+
+**Nhận xét về thuật toán**
+
+* **Đầy đủ :** Có *(nó duyệt qua các nút trong từng hàng, nếu số nút trong hàng là hữu hạn thì đầy đủ như BFS.)*
+* **Thời gian:** *(Time Complexity)* :
+    * Giả sử mỗi nút có tối đa b nút con, d: độ sâu từ S -> G, m: độ sâu tối đa của cây.
+    * BFS chỉ cần tìm được G là dừng ko cần quan tâm đến các con đường khác, nhưng UCS phải dò hết đuờng để tìm giá nhỏ nhất. (BFS ko bao giờ duyệt các tầng n : d < n <m, nhung UCS phải duyệt đến cả tầng m.)
+    * **UCS** ko quan tâm đến d, nó dừng khi tìm đuợc giá nhỏ nhất. **C** là đường tối ưu, mỗi tầng bạn tiến gần đến C hơn e lần => bạn cần **C**/e + 1 tầng. Time = O(b<sup>C/e</sup>) (nghe phức tạp thật nhưng ta biết rằng C/e+1 > d).
+* **Bộ nhớ:** *(Space complexity)* O(b<sup>C/e</sup>)
+* **Tối ưu?** Có (mất thời gian duyệt hết mà ko tối ưu thì hơi lạ.)
+
 
 ### Thực hành Coding
 
@@ -296,7 +307,7 @@ ucs.solve()
 
 #### Đây là kết quả khi chạy :
 
-![UCS Solved]({{'/images/solve_ucs.png'}}){: .align-center}
+![UCS Solved]({{'/images/study/algo/solve_ucs.png'}}){: .align-center}
 
 #### Đây là góc nhìn của mình (sinh viên) về môn học , nên không có ý dạy bảo ai cả.
 {: .notice--warning}
